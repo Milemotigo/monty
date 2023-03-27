@@ -1,161 +1,59 @@
+Monty Interpreter
+Monty is a simple interpreter for a subset of the stack-based programming language Monty. Monty uses a stack to evaluate expressions and has a small number of operations.
 
-Sign up
-Dikachis
-/
-monty
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-Insights
-monty/README.md
-@Dikachis
-Dikachis Updated Readme.md file
- 1 contributor
-121 lines (111 sloc)  4.78 KB
-0x19. C - Stacks, Queues - LIFO, FIFO
-About: In this project, we created a simple interpreter for Monty ByteCodes. The interpreter reads a bytecode file and executes the bytecode commands.
+Installation
+To build the Monty interpreter, clone the repository and compile the source code using gcc:
 
-The Monty language
-Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python). It relies on a unique stack, with specific instructions to manipulate it.
+bash
+Copy code
+git clone https://github.com/<username>/monty.git
+cd monty
+gcc -Wall -Werror -Wextra -pedantic *.c -o monty
+Usage
+The Monty interpreter can be run with a Monty bytecode file:
 
-Monty byte code files
-Files containing Monty byte codes usually have the .m extension. Most of the industry uses this standard but it is not required by the specification of the language. There is not more than one instruction per line. There can be any number of spaces before or after the opcode and its argument: examples
+bash
+Copy code
+./monty bytecode.m
+Supported Operations
+The Monty interpreter supports the following operations:
 
-Objectives:
-To know what LIFO and FIFO mean
-To know what a stack is, and when to use it
-To know what a queue is, and when to use it
-To know the common implementations of stacks and queues
-To know the most common use cases of stacks and queues
-To know the proper way to use global variables
-Resource:
-Difference between Stack and Queue Data Structures ||
-General Requirements
-Allowed editors: vi, vim, emacs
-All files is compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=gnu89
-All files ends with a new line
-There is README.md file at the root of the alx-low_level_programming
-Maximum of one global variable is allowed
-No more than 5 functions per file
-The C standard library is allowed
-The prototypes of all the functions were included in the header file called monty.h
-All the header files are include guarded
-Instruction given:
-To use the following data structures for this project, and to also include them in the header file.
-/**
- * struct stack_s - doubly linked list representation of a stack (or queue)
- * @n: integer
- * @prev: points to the previous element of the stack (or queue)
- * @next: points to the next element of the stack (or queue)
- *
- * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
- */
-typedef struct stack_s
-{
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
-} stack_t;
-/**
- * struct instruction_s - opcode and its function
- * @opcode: the opcode
- * @f: function to handle the opcode
- *
- * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
- */
-typedef struct instruction_s
-{
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
-} instruction_t;
-List of files/Descriptions:
-S/N	Files	Description
-1.		
-2.		
-3.		
-4.		
-5.		
-Compilation & Output
-These codes were compiled using: gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
-Any output must be printed on stdout
-Any error message must be printed on stderr
-Examples
-julien@ubuntu:~/monty$ cat -e bytecodes/000.m
-push 0$
-push 1$
-push 2$
-  push 3$
-                   pall    $
-push 4$
-    push 5    $
-      push    6        $
-pall$
-julien@ubuntu:~/monty$
-Monty byte code files can contain blank lines (empty or made of spaces only, and any additional text after the opcode or its required argument is not taken into account:
+push <int>: Pushes an element to the stack
+pall: Prints all the values on the stack
+pint: Prints the value at the top of the stack
+pop: Removes the top element of the stack
+swap: Swaps the top two elements of the stack
+add: Adds the top two elements of the stack
+nop: Does nothing
+sub: Subtracts the top element of the stack from the second top element
+div: Divides the second top element of the stack by the top element
+mul: Multiplies the second top element of the stack with the top element
+mod: Computes the modulus of the second top element of the stack with the top element
+pchar: Prints the ASCII character value of the top element of the stack
+pstr: Prints the string starting at the top of the stack
+rotl: Rotates the stack to the top
+rotr: Rotates the stack to the bottom
+queue: Sets the format of the stack to a queue
+stack: Sets the format of the stack to a stack
+Example
+Consider the following Monty bytecode file example.m:
 
-julien@ubuntu:~/monty$ cat -e bytecodes/001.m
-push 0 Push 0 onto the stack$
-push 1 Push 1 onto the stack$
-$
-push 2$
-  push 3$
-                   pall    $
-$
-$
-                           $
-push 4$
-$
-    push 5    $
-      push    6        $
-$
-pall This is the end of our program. Monty is awesome!$
-julien@ubuntu:~/monty$
-Some examples of using monty and its console output.
-Example #1	Example #2	Example #3
-~/monty$ cat -e bytecodes/00.m
-push 1$
-push 2$
-push 3$
-pall$
-~/monty$ ./monty bytecodes/00.m
-3
-2
-1	~/monty$ cat bytecodes/07.m
+perl
+Copy code
 push 1
 push 2
 push 3
 pall
-pop
+add
 pall
-pop
-pall
-pop
-pall
-~/monty$ ./monty bytecodes/07.m
+The output of the Monty interpreter when run with this file is:
+
+Copy code
 3
 2
 1
+5
 2
 1
-1	~/monty$ cat bytecodes/09.m
-push 1
-push 2
-push 3
-pall
-swap
-pall
-~/monty$ ./monty bytecodes/09.m
-3
-2
-1
-2
-3
-1
-Author
-MASKOLI FAVOUR
+Author:
+Maskoli Favour
